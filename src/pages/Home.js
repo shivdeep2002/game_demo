@@ -57,9 +57,9 @@ const Home = () => {
             <div className=" mt-12">
               <div className="flex space-x-10">
                 <img
-                  src="https://via.placeholder.com/250?text=Image+1" // Replace with your first image URL
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIO4kw4CJYq4u79F13XGgysu28MPNqUbPG8Q&s" // Replace with your first image URL
                   alt="Image 1"
-                  className={`cursor-pointer border-2 ${
+                  className={`cursor-pointer border-2 w-1/2 ${
                     selectedImage === "Image 1"
                       ? "border-blue-500"
                       : "border-gray-300"
@@ -67,9 +67,9 @@ const Home = () => {
                   onClick={() => handleImageClick("Image 1")}
                 />
                 <img
-                  src="https://via.placeholder.com/250?text=Image+2" // Replace with your second image URL
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIO4kw4CJYq4u79F13XGgysu28MPNqUbPG8Q&s" // Replace with your second image URL
                   alt="Image 2"
-                  className={`cursor-pointer border-2 ${
+                  className={`cursor-pointer border-2 w-1/2 ${
                     selectedImage === "Image 2"
                       ? "border-blue-500"
                       : "border-gray-300"
@@ -77,18 +77,22 @@ const Home = () => {
                   onClick={() => handleImageClick("Image 2")}
                 />
               </div>
-              <button
-                onClick={handlePlayClick}
-                className="w-[13vw] mt-10 px-20 py-2 text-lg font-semibold bg-blue-500 text-white hover:bg-blue-600 transition"
-              >
-                Next
-              </button>
+              <div className="w-full flex flex-col items-center text-2xl mt-5 ">
+                <p className="">Privacy Hero or Zero?</p>
+
+                <button
+                  onClick={handlePlayClick}
+                  className="w-[25vw] px-20 py-2 mt-5 text-lg font-semibold bg-blue-500 text-white hover:bg-blue-600 transition"
+                >
+                  Start
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div className=" border w-[30%]">
-        <h2 className="text-2xl text-center mt-5">About Us</h2>
+        <h2 className="text-2xl text-center mt-5">Leader Board</h2>
 
         <div className="w-full pr-5">
           <div className="w-full text-right">
@@ -106,14 +110,19 @@ const Home = () => {
                   className="w-full gap-2 border-b flex items-center p-1 "
                 >
                   <img
-                    src="https://via.placeholder.com/250?text=Image+1"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIO4kw4CJYq4u79F13XGgysu28MPNqUbPG8Q&s"
                     alt=""
-                    className="object-cover h-14 w-14 rounded-full border "
+                    className="object-cover h-14 w-14 rounded-full border p-1"
                   />
                   <div className="w-full flex justify-between gap-2">
                     <span className="text-sm"> {hero.name}</span>
-                    {/* <span className=""> {hero.company}</span> */}
-                    <span className=""> {hero.designation}</span>
+                    <span className="">
+                      {" "}
+                      {"("}
+                      {hero.company}
+                      {")"}
+                    </span>
+                    <span className=""> {hero.questionsCorrected}</span>
                     {/* <span className=""> {hero.email}</span> */}
                   </div>
                 </div>

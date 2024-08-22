@@ -15,7 +15,13 @@ const AboutInfomesa = () => {
   };
 
   const handlePlayClick = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (email && company) {
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
       localStorage.setItem("email", email);
       localStorage.setItem("company", company);
       navigate("/quiz");
@@ -31,7 +37,7 @@ const AboutInfomesa = () => {
           <h2 className="text-2xl text-center mt-2">What are you?</h2>
           <div className="flex justify-center space-x-5 mt-5 items-center">
             <p
-              className={`cursor-pointer px-2 border-2 ${
+              className={`cursor-pointer px-2 border-2 hover:border-blue-500 ${
                 selectedOption === "Developer"
                   ? "border-blue-500"
                   : "border-gray-300"
@@ -41,7 +47,7 @@ const AboutInfomesa = () => {
               Developer
             </p>
             <p
-              className={`cursor-pointer border-2 ${
+              className={`cursor-pointer border-2 hover:border-blue-500 ${
                 selectedOption === "UI_UX_Designer"
                   ? "border-blue-500"
                   : "border-gray-300"
@@ -51,7 +57,7 @@ const AboutInfomesa = () => {
               UI/UX Designer
             </p>
             <p
-              className={`cursor-pointer px-2 border-2 ${
+              className={`cursor-pointer px-2 border-2 hover:border-blue-500 ${
                 selectedOption === "Product_Manager"
                   ? "border-blue-500"
                   : "border-gray-300"
@@ -61,7 +67,7 @@ const AboutInfomesa = () => {
               Product Manager
             </p>
             <p
-              className={`cursor-pointer px-2 border-2 ${
+              className={`cursor-pointer px-2 border-2 hover:border-blue-500 ${
                 selectedOption === "Data_Scientist"
                   ? "border-blue-500"
                   : "border-gray-300"
@@ -84,6 +90,7 @@ const AboutInfomesa = () => {
             />
             <input
               type="email"
+              required
               placeholder="Enter Email"
               className="border-2 p-2 w-full max-w-[40vw]"
               onChange={(e) => setEmail(e.target.value)}

@@ -229,6 +229,8 @@ const CSSQuiz = () => {
     const storedAnswer = localStorage.getItem("field");
     if (storedAnswer == "Developer") {
       setSelectedData(Developer);
+    } else if (storedAnswer == "UI_UX_Designer") {
+      setSelectedData(UI_UX_Designer);
     }
     if (storedAnswer) {
       setDesignation(storedAnswer);
@@ -292,69 +294,59 @@ const CSSQuiz = () => {
 
   return (
     <div className="bg-gradient-to-r from-blue-800 to-purple-400 text-white font-comfortaa min-h-[95vh] flex flex-col items-center ">
-      <div className="relative w-full mb-20 p-4">
-        <div className="flex  gap-3 absolute right-4 ">
-          {wrongImageCount >= 1 && (
-            <img
-              src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg"
-              alt="image"
-              className="h-10 w-10 bg-red-300"
-            />
-          )}{" "}
-          {wrongImageCount >= 2 && (
-            <img
-              src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg"
-              alt="image"
-              className="h-10 w-10 bg-red-300"
-            />
-          )}{" "}
-          {wrongImageCount >= 3 && (
-            <img
-              src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg"
-              alt="image"
-              className="h-10 w-10 bg-red-300"
-            />
-          )}
-          {imageCount >= 1 && (
-            <img
-              src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg"
-              alt="image"
-              className="h-10 w-10 "
-            />
-          )}
-          {imageCount >= 2 && (
-            <img
-              src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg"
-              alt="image"
-              className="h-10 w-10"
-            />
-          )}
-          {imageCount >= 3 && (
-            <img
-              src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg"
-              alt="image"
-              className="h-10 w-10"
-            />
-          )}
-        </div>
+      <div>
+        {imageCount === 0 ? (
+          <section
+            id="game-over"
+            className="w-[100vw] bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center"
+          >
+            <div className="animate-pulse w-12 h-12 mb-6">
+              {/* Game Over Icon (optional) */}
+              {/* You can add your custom SVG or icon here */}
+            </div>
+            <h2 className="text-center text-4xl font-bold mb-4">Game Over</h2>
+            <p className="text-center text-xl mb-8">Better luck next time!</p>
+            <button
+              onClick={() => navigate("/")}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Try Again
+            </button>
+          </section>
+        ) : (
+          <div className="w-[100vw]">
+            <div className="relative w-full mb-20 p-4">
+              <div className="flex  gap-3 absolute right-4 ">
+                {imageCount >= 1 && (
+                  <img src="/hart.png" alt="image" className="h-10 w-10 " />
+                )}
+                {imageCount >= 2 && (
+                  <img src="/hart.png" alt="image" className="h-10 w-10" />
+                )}
+                {imageCount >= 3 && (
+                  <img src="/hart.png" alt="image" className="h-10 w-10" />
+                )}
+              </div>
+            </div>
+            {selectedData[index] &&
+              Array.isArray(selectedData[index]) &&
+              selectedData[index].map((data) => (
+                <Quese
+                  data={data}
+                  key={data.question}
+                  setCorrectAnswer={setCorrectAnswer}
+                  correctAnswer={correctAnswer}
+                  handleOptionNext={handleOptionNext}
+                  setScore={setScore}
+                  score={score}
+                  setSelectedOption={setSelectedOption}
+                  selectedOption={selectedOption}
+                  selectedData={selectedData}
+                />
+              ))}
+          </div>
+        )}
       </div>
-      {selectedData[index] &&
-        Array.isArray(selectedData[index]) &&
-        selectedData[index].map((data) => (
-          <Quese
-            data={data}
-            key={data.question}
-            setCorrectAnswer={setCorrectAnswer}
-            correctAnswer={correctAnswer}
-            handleOptionNext={handleOptionNext}
-            setScore={setScore}
-            score={score}
-            setSelectedOption={setSelectedOption}
-            selectedOption={selectedOption}
-            selectedData={selectedData}
-          />
-        ))}
-
       {/* Repeat similar sections for the other questions */}
 
       {/* Score Counter */}
@@ -373,7 +365,7 @@ const CSSQuiz = () => {
               You Won The Game
             </h1>
             <h2 className="mt-4 text-xl">
-              Total Score: {selectedOption ? score : 0}/5
+              Total Score: {selectedOption ? score : 0}
             </h2>
             <input
               className="text-black p-2 w-3/4 bg-transparent border mt-5"
@@ -396,25 +388,6 @@ const CSSQuiz = () => {
       )}
 
       {/* Refresh Page Section */}
-      {/* <section
-        id="refresh"
-        className="bg-gray-800 text-white min-h-screen flex flex-col items-center justify-center"
-      >
-        <svg
-          className="animate-pulse w-12 h-12 mb-6"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 341.12 341.33"
-        >
-          <path
-            className="fill-white"
-            d="M341.23,149.33V0L291.09,50.13A169.56,169.56,0,0,0,170.56,0C76.27,0,.11,76.37.11,170.67S76.27,341.33,170.56,341.33c79.47,0,146-54.4,164.91-128H291.09A127.94,127.94,0,1,1,170.56,42.67c35.31,0,67,14.72,90.13,37.86l-68.8,68.8Z"
-            transform="translate(-0.11)"
-          />
-        </svg>
-        <h2 className="text-center text-xl">
-          Refresh/Reload this page to continue
-        </h2>
-      </section> */}
     </div>
   );
 };
